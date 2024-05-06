@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML TEMPLATING</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <div id="container"></div>
+
+    <!-- STEP 1: DEFINE THE TEMPLATE STRUCTURE IN HTML -->
+    <template id="first-template">
+      <h2>This is the first template</h2>
+    </template>
+
+    <script>
+        
+        // STEP 2 : GET THE REFERENCE TO THE TEMPLATE AND CONTAINER
+      const template = document.getElementById("first-template");
+      const container = document.getElementById("container");
+        // STEP 3 : CLONE THE TEMPLATE AND APPEND IT TO THE CONTAINER
+      const clone = template.content.cloneNode(true);
+      container.appendChild(clone);
+    </script>
+  </body>
+</html>

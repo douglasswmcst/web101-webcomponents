@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CUSTOM ELEMENT</title>
+  </head>
+  <body>
+    <h1>CUSTOM ELEMENT OF HELLO WORLD WILL BE DISPLAYED BELOW LA</h1>
+    <div id="container"></div>
+
+    <!-- STEP 6: USE THE CUSTOM ELEMENT BY DEFINING ITS TAG IN HTML BODY -->
+    <hello-world></hello-world>
+
+    <!-- <template id="first-template">
+      <h2>This is the first template</h2>
+    </template> -->
+
+    <script>
+      // STEP 1: DEFINE THE TEMPLATE STRUCTURE IN JS AS A CLASS  
+      class HelloWorld extends HTMLElement {
+        constructor() {
+          super();
+          // STEP 2: create a shadow dom
+          const shadow = this.attachShadow({ mode: "open" });
+          // STEP 3: create an element
+          const heading = document.createElement("h2");
+          heading.textContent = "Hello World";
+          // STEP 4: append the element to the shadow dom
+          shadow.appendChild(heading);
+        }
+      }
+      // STEP 5: DEFINE THE CUSTOM ELEMENT
+      customElements.define("hello-world", HelloWorld);
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TEMPLATE SLOTS</title>
+  </head>
+  <body>
+    <h1>TEMPLATE AND SLOTS!</h1>
+    <div id="container"></div>
+
+    <!-- STEP 4: USE THE CUSTOM ELEMENT BY DEFINING ITS TAG IN HTML BODY -->
+    <hello-world>
+      <!-- STEP 5 : PROVIDE THE CONTENTS OF THE FIRST SLOT -->
+      <h3>Hello from the slot</h3>
+      <!-- STEP 6 : PROVIDE CONTENTS OF THE NAMED SLOT -->
+      <h3 slot="named-slot">Hello from the named slot</h3>
+    </hello-world>
+
+    <template id="template">
+      <h2>YOU SHOULD BE SEEING 3 SENTENCES!</h2>
+      <!-- BY DEFINING THIS SLOT IT WILL BE REPLACED BY THE CONTENTS OF THE SLOT. 
+        IT KINDA SAVES A SPACE FOR YOU TO PUT ANYTHING YOPU WANT IN IT. -->
+      <slot></slot>
+      <!-- YOU CAN ALSO NAME IT LIKE THIS WITH THE ATTRIBUTE TAG NAME-->
+      <slot name="named-slot"></slot>
+    </template>
+
+    <script>
+      // STEP 1: DEFINE THE TEMPLATE STRUCTURE IN JS AS A CLASS
+      class HelloWorld extends HTMLElement {
+        constructor() {
+          super();
+          // STEP 2: create a shadow dom
+          const shadow = this.attachShadow({ mode: "open" });
+          // STEP 3: create an element
+          // CREATE A CUSTOM ELEMENT BY CLONING THE TEMPLATE BY GETTING ITS REFERENCE
+          const template = document.getElementById("template");
+          const clone = template.content.cloneNode(true);
+          // append the CUSTOM element to the shadow dom
+          shadow.appendChild(clone);
+        }
+      }
+      customElements.define("hello-world", HelloWorld);
+
+      //   const template = document.getElementById("first-template");
+      //   const container = document.getElementById("container");
+
+      // When we clone, they are totally separate.
+      // .content of the template, is a document fragment. not an html element.
+      //   const clone = template.content.cloneNode(true);
+      //   clone.addEventListener("click", () => {
+      //     alert("clicked clone 1");
+      //   });
+      //   container.appendChild(clone);
+
+      //   const clone2 = template.content.firstElementChild.cloneNode(true);
+      //   clone2.addEventListener("click", () => {
+      //     alert("clicked clone 2");
+      //   });
+      //   container.appendChild(clone2);
+    </script>
+  </body>
+</html>
